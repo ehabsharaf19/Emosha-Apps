@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إيموشا - دليل ومقارنات أفضل التطبيقات 2026</title>
+    <title>إيموشا Emosha Apps - دليل ومقارنات أفضل التطبيقات 2026</title>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: #f0f2f5; margin: 0; padding: 0; color: #333; direction: rtl; }
         
-        /* Header & Navigation */
+        /* Header */
         header { background: #007bff; color: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .logo { font-size: 22px; font-weight: bold; color: white; text-decoration: none; }
-        .logo span { font-size: 14px; opacity: 0.9; font-weight: normal; margin-right: 5px; }
-        .nav-links { display: flex; gap: 15px; list-style: none; margin: 0; padding: 0; }
-        .nav-links a { color: white; text-decoration: none; font-size: 15px; font-weight: 500; transition: opacity 0.2s; }
-        .nav-links a:hover { opacity: 0.8; text-decoration: underline; }
+        .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: bold; color: white; text-decoration: none; }
+        .logo span { font-size: 13px; opacity: 0.9; font-weight: normal; margin-right: 5px; }
+        .home-btn { color: white; text-decoration: none; font-size: 15px; font-weight: 500; background: rgba(255,255,255,0.2); padding: 6px 15px; border-radius: 4px; }
+        .home-btn:hover { background: rgba(255,255,255,0.3); }
 
         /* Main Layout */
         .container { max-width: 900px; margin: 25px auto; padding: 0 15px; }
@@ -28,19 +27,19 @@
         /* App Cards */
         .app-card { background: #fff; border: 1px solid #e9ecef; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
         .app-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .app-icon { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; border: 1px solid #ddd; }
+        .app-icon { width: 55px; height: 55px; border-radius: 12px; object-fit: cover; border: 1px solid #ddd; background: #e9ecef; }
         .app-name { font-size: 20px; font-weight: bold; color: #222; margin: 0; }
         .app-desc { font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 15px; }
         .download-btn { display: inline-block; background: #28a745; color: white; text-decoration: none; padding: 12px 25px; border-radius: 6px; font-weight: bold; text-align: center; transition: background 0.2s; width: 100%; }
         .download-btn:hover { background: #218838; }
 
-        /* Pages Content */
+        /* Bottom Pages Content */
         .page-content { display: none; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); line-height: 1.8; }
         .page-content h2 { color: #007bff; margin-top: 0; }
 
         /* Footer */
         footer { background: #1a252f; color: #aaa; text-align: center; padding: 25px 15px; margin-top: 40px; font-size: 14px; }
-        footer a { color: #fff; text-decoration: none; margin: 0 10px; }
+        footer a { color: #fff; text-decoration: none; margin: 0 8px; }
         footer a:hover { text-decoration: underline; }
         .footer-links { margin-bottom: 12px; }
     </style>
@@ -50,14 +49,9 @@
 <header>
     <div class="nav-container">
         <a href="#" onclick="showHome()" class="logo">
-            إيموشا <span>| دليل ومقارنات أفضل التطبيقات</span>
+            إيموشا Emosha Apps <span>| دليل ومقارنات أفضل التطبيقات</span>
         </a>
-        <ul class="nav-links">
-            <li><a href="#" onclick="showHome()">الرئيسية</a></li>
-            <li><a href="#" onclick="showPage('aboutPage')">من نحن</a></li>
-            <li><a href="#" onclick="showPage('privacyPage')">سياسة الخصوصية</a></li>
-            <li><a href="#" onclick="showPage('contactPage')">اتصل بنا</a></li>
-        </ul>
+        <a href="#" onclick="showHome()" class="home-btn">الرئيسية</a>
     </div>
 </header>
 
@@ -71,15 +65,15 @@
     <!-- صفحة من نحن -->
     <div id="aboutPage" class="page-content">
         <h2>من نحن</h2>
-        <p>مرحباً بكم في منصة <strong>إيموشا (Emosha Apps)</strong>، المنصة المتخصصة في تقديم المراجعات والمقارنات الشاملة لأحدث تطبيقات الهواتف الذكية، أدوات المونتاج، وتطبيقات الذكاء الاصطناعي.</p>
+        <p>مرحباً بكم في منصة <strong>إيموشا Emosha Apps</strong>، المنصة المتخصصة في تقديم المراجعات والمقارنات الشاملة لأحدث تطبيقات الهواتف الذكية، أدوات المونتاج، وتطبيقات الذكاء الاصطناعي.</p>
         <p>نهدف إلى مساعدة المستخدم العربي وصناع المحتوى في اختيار أفضل التطبيقات والبرامج التي تناسب احتياجاتهم اليومية والاحترافية من خلال تقديم شرح مبسط ومباشر وروابط تحميل آمنة ورسمية دائماً.</p>
     </div>
 
-    <!-- صفحة سياسة الخصوصية المحدثة -->
+    <!-- صفحة سياسة الخصوصية -->
     <div id="privacyPage" class="page-content">
         <h2>سياسة الخصوصية</h2>
         <p><small style="color: #777;">آخر تحديث: أغسطس 2026</small></p>
-        <p>في منصة <strong>إيموشا</strong>، نولي أهمية قصوى لحماية خصوصية زوارنا والالتزام بالشفافية الكاملة:</p>
+        <p>في منصة <strong>إيموشا Emosha Apps</strong>، نولي أهمية قصوى لحماية خصوصية زوارنا والالتزام بالشفافية الكاملة:</p>
         
         <h3>1. جمع المعلومات</h3>
         <p>نحن لا نجمع أي بيانات شخصية محددة للهوية (مثل اسمك أو بريدك الإلكتروني) إلا إذا قمت بالتواصل معنا طواعية عبر وسائل الاتصال المتاحة.</p>
@@ -88,7 +82,7 @@
         <p>قد يستخدم موقعنا ملفات تعريف الارتباط لتحسين تجربة التصفح وتذكر تفضيلاتك، بالإضافة إلى تحليل الزيارات لتحسين المحتوى والمقارنات المقدمة.</p>
 
         <h3>3. الإعلانات وتطبيقات الطرف الثالث (Google AdSense)</h3>
-        <p>نستخدم شركات إعلانية خارجية مثل <strong>Google AdSense</strong> لعرض الإعلانات عند زيارة موقعنا. تتبع هذه الشركات ملفات تعريف الارتباط لتحديد الإعلانات المناسبة بناءً على زياراتك السابقة لهذا الموقع ومواقع أخرى على الإنترنت. يمكنك إدارة وتخصيص إعلاناتك عبر إعدادات إعلانات جوجل.</p>
+        <p>نستخدم شركات إعلانية خارجية مثل <strong>Google AdSense</strong> لعرض الإعلانات عند زيارة موقعنا. تتبع هذه الشركات ملفات تعريف الارتباط لتحديد الإعلانات المناسبة بناءً على زياراتك السابقة لهذا الموقع ومواقع أخرى على الإنترنت.</p>
 
         <h3>4. الروابط الخارجية للمتجر</h3>
         <p>تتضمن مقالاتنا ومراجعاتنا روابط توجهك مباشرة إلى المتاجر الرسمية المعتمدة (مثل Google Play Store). نحن لسنا مسؤولين عن سياسة الخصوصية والممارسات الخاصة بهذه التطبيقات بعد المغادرة إلى متجر جوجل.</p>
@@ -102,7 +96,7 @@
         <h2>اتصل بنا</h2>
         <p>إذا كان لديك أي استفسار، اقتراح، أو رغبة في التواصل مع إدارة الموقع، يمكنك مراسلتنا عبر البريد الإلكتروني الرسمي:</p>
         <p style="background: #f8f9fa; padding: 15px; border-radius: 6px; font-weight: bold; color: #007bff; text-align: center; direction: ltr;">
-            contact@emosha-apps.com
+            ehabsharaf28@gmail.com
         </p>
     </div>
 
@@ -115,7 +109,7 @@
         <a href="#" onclick="showPage('privacyPage')">سياسة الخصوصية</a> | 
         <a href="#" onclick="showPage('contactPage')">اتصل بنا</a>
     </div>
-    <div>جميع الحقوق محفوظة © 2026 - منصة إيموشا لتطبيقات الهواتف</div>
+    <div>جميع الحقوق محفوظة © 2026 - إيموشا Emosha Apps</div>
 </footer>
 
 <script>
@@ -150,10 +144,13 @@
             let appsHtml = "";
             if (article.apps && article.apps.length > 0) {
                 article.apps.forEach((app) => {
+                    // معالجة رابط الصورة لتفادي ظهور Error
+                    const iconUrl = app.icon && app.icon.trim() !== "" ? app.icon : "https://cdn-icons-png.flaticon.com/512/2589/2589175.png";
+                    
                     appsHtml += `
                         <div class="app-card">
                             <div class="app-header">
-                                ${app.icon ? `<img src="${app.icon}" class="app-icon" alt="${app.name}">` : ''}
+                                <img src="${iconUrl}" class="app-icon" alt="${app.name}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2589/2589175.png'">
                                 <h3 class="app-name">${app.name}</h3>
                             </div>
                             <div class="app-desc">${app.desc}</div>
