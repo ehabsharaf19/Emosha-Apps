@@ -23,7 +23,7 @@
         .app-icon { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #ddd; }
         .app-name { margin: 0; font-size: 18px; color: #222; }
         .app-desc { font-size: 14px; line-height: 1.6; color: #555; white-space: pre-line; }
-        .download-btn { display: inline-block; background: #28a745; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; margin-top: 12px; font-size: 14px; text-align: center; }
+        .download-btn { display: inline-block; background: #28a745; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; margin-top: 12px; font-size: 14px; text-align: center; cursor: pointer; }
         .download-btn:hover { background: #218838; }
         
         #loading { text-align: center; font-size: 18px; color: #666; margin: 40px 0; }
@@ -43,6 +43,14 @@
 
 <script>
     const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles.json";
+
+    // دالة إصلاح وتصحيح أي رابط قبل تحويل المستخدم إليه
+    function fixAndOpenUrl(url) {
+        if (!url) return;
+        // إزالة الأقواس والرموز والمسافات الزائدة
+        let clean = url.replace(/[\[\]\(\)\`\'\"\s]/g, "").trim();
+        window.open(clean, '_blank');
+    }
 
     fetch(dbUrl)
         .then(response => response.json())
@@ -70,7 +78,7 @@
                                     <h3 class="app-name">${app.name}</h3>
                                 </div>
                                 <div class="app-desc">${app.desc}</div>
-                                ${app.link ? `<a href="${app.link}" target="_blank" rel="noopener noreferrer" class="download-btn">تحميل ${app.name} من جوجل بلاي</a>` : ''}
+                                ${app.link ? `<button onclick="fixAndOpenUrl('${app.link}')" class="download-btn">تحميل ${app.name} من جوجل بلاي</button>` : ''}
                             </div>
                         `;
                     });
