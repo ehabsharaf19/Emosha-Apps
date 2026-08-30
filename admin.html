@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - إضافة تطبيق جديد</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f2f5; padding: 20px; direction: rtl; }
+        .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #007bff; margin-bottom: 20px; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #333; }
+        input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 16px; margin-top: 20px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #218838; }
+        #status { margin-top: 15px; text-align: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>إضافة مراجعة تطبيق جديد</h2>
+    <form id="appForm">
+        <label>اسم التطبيق:</label>
+        <input type="text" id="appName" placeholder="مثال: CapCut" required>
+
+        <label>رابط أيقونة التطبيق (صورة):</label>
+        <input type="url" id="appIcon" placeholder="https://example.com/icon.png" required>
+
+        <label>التصنيف:</label>
+        <select id="appCategory">
+            <option value="تطبيقات المونتاج والتصميم">تطبيقات المونتاج والتصميم</option>
+            <option value="تطبيقات الإنتاجية">تطبيقات الإنتاجية</option>
+            <option value="أدوات الذكاء الاصطناعي">أدوات الذكاء الاصطناعي</option>
+            <option value="ألعاب الجوال">ألعاب الجوال</option>
+        </select>
+
+        <label>شرح التطبيق ومميزاته (المقال):</label>
+        <textarea id="appDesc" rows="6" placeholder="اكتب مراجعة شاملة ومميزات التطبيق هنا..." required></textarea>
+
+        <label>رابط التحميل المباشر من جوجل بلاي:</label>
+        <input type="url" id="playStoreUrl" placeholder="https://play.google.com/store/apps/details?id=..." required>
+
+        <button type="submit">نشر التطبيق</button>
+    </form>
+    <div id="status"></div>
+</div>
+
+<script>
+    const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/apps.json";
+
+    document.getElementById("appForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const statusDiv = document.getElementById("status");
+        statusDiv.style.color = "blue";
+        statusDiv.innerText = "جاري النشر...";
+
+        const appData = {
+            title: document.getElementById("appName").value,
+            icon: document.getElementById("appIcon").value,
+            category: document.getElementById("appCategory").value,
+            description: document.getElementById("appDesc").value,
+            playUrl: document.getElementById("playStoreUrl").value,
+            date: new Date().toLocaleDateString('ar-EG')
+        };
+
+        fetch(dbUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(appData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            statusDiv.style.color = "green";
+            statusDiv.innerText = "تم نشر التطبيق بنجاح!";
+            document.getElementById("appForm").reset();
+        })
+        .catch(error => {
+            statusDiv.style.color = "red";
+            statusDiv.innerText = "حدث خطأ أثناء النشر!";
+            console.error(error);
+        });
+    });
+</script>
+
+</body>
+</html>
