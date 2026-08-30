@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم - نشر المقالات والمقارنات</title>
+    <title>لوحة التحكم - إدارة ونشر المقالات</title>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: #f0f2f5; margin: 0; padding: 20px; direction: rtl; }
@@ -14,14 +15,25 @@
         #loginBox button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
         #loginError { color: red; font-size: 14px; margin-top: 10px; display: none; }
 
-        #adminPanel { display: none; max-width: 750px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #007bff; margin-bottom: 20px; }
+        #adminPanel { display: none; max-width: 850px; margin: 0 auto; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        h2, h3 { color: #007bff; margin-top: 0; }
         label { display: block; margin-top: 15px; font-weight: bold; color: #333; }
         input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; }
+        
         .app-block { background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px dashed #007bff; margin-top: 15px; }
         .app-block h4 { margin: 0 0 10px; color: #007bff; }
+        
         .submit-btn { width: 100%; padding: 14px; background: #28a745; color: white; border: none; border-radius: 6px; font-size: 17px; margin-top: 20px; cursor: pointer; font-weight: bold; }
+        .cancel-btn { width: 100%; padding: 10px; background: #6c757d; color: white; border: none; border-radius: 6px; font-size: 15px; margin-top: 10px; cursor: pointer; font-weight: bold; display: none; }
         .add-app-btn { width: 100%; padding: 10px; background: #17a2b8; color: white; border: none; border-radius: 6px; margin-top: 15px; cursor: pointer; font-weight: bold; }
+        
+        .article-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee; }
+        .article-item:last-child { border-bottom: none; }
+        .action-btns { display: flex; gap: 8px; }
+        .btn-edit { background: #ffc107; color: #000; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-delete { background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        
         #status { margin-top: 15px; text-align: center; font-weight: bold; }
     </style>
 </head>
@@ -36,61 +48,74 @@
 </div>
 
 <div id="adminPanel">
-    <h2>نشر مقال / مقارنة تطبيقات جديدة</h2>
-    <form id="articleForm">
-        <label>عنوان المقال الرئيسي:</label>
-        <input type="text" id="articleTitle" placeholder="اكتب عنوان المقال هنا..." required>
+    
+    <!-- قسم إدارة المقالات الحالية -->
+    <div class="card">
+        <h3>المقالات المنشورة حالياً</h3>
+        <div id="articlesList">جاري تحميل المقالات...</div>
+    </div>
 
-        <label>صورة الغلاف للمقال (رابط الصورة):</label>
-        <input type="text" id="articleCover" placeholder="https://example.com/cover.jpg">
+    <!-- قسم نموذج النشر والتعديل -->
+    <div class="card">
+        <h2 id="formTitle">نشر مقال / مقارنة جديدة</h2>
+        <form id="articleForm">
+            <input type="hidden" id="editArticleKey" value="">
 
-        <label>التصنيف:</label>
-        <select id="articleCategory">
-            <option value="تطبيقات المونتاج والتصميم">تطبيقات المونتاج والتصميم</option>
-            <option value="أدوات الذكاء الاصطناعي">أدوات الذكاء الاصطناعي</option>
-            <option value="تطبيقات الإنتاجية">تطبيقات الإنتاجية</option>
-            <option value="مقارنات ومراجعات">مقارنات ومراجعات</option>
-        </select>
+            <label>عنوان المقال الرئيسي:</label>
+            <input type="text" id="articleTitle" placeholder="اكتب عنوان المقال هنا..." required>
 
-        <label>مقدمة المقال (تمهيد للمقارنة):</label>
-        <textarea id="articleIntro" rows="3" placeholder="اكتب مقدمة المقال هنا..." required></textarea>
+            <label>صورة الغلاف للمقال (رابط الصورة):</label>
+            <input type="text" id="articleCover" placeholder="https://example.com/cover.jpg">
 
-        <div id="appsContainer"></div>
+            <label>التصنيف:</label>
+            <select id="articleCategory">
+                <option value="تطبيقات المونتاج والتصميم">تطبيقات المونتاج والتصميم</option>
+                <option value="أدوات الذكاء الاصطناعي">أدوات الذكاء الاصطناعي</option>
+                <option value="تطبيقات الإنتاجية">تطبيقات الإنتاجية</option>
+                <option value="مقارنات ومراجعات">مقارنات ومراجعات</option>
+            </select>
 
-        <button type="button" class="add-app-btn" onclick="addAppBlock()">+ إضافة تطبيق آخر للمقارنة</button>
+            <label>مقدمة المقال (تمهيد للمقارنة):</label>
+            <textarea id="articleIntro" rows="3" placeholder="اكتب مقدمة المقال هنا..." required></textarea>
 
-        <label>خاتمة المقال / الخلاصة والتوصية النهائية:</label>
-        <textarea id="articleOutro" rows="3" placeholder="اكتب الخلاصة والتوصية هنا..."></textarea>
+            <div id="appsContainer"></div>
 
-        <button type="submit" class="submit-btn">نشر المقال بالكامل</button>
-    </form>
-    <div id="status"></div>
+            <button type="button" class="add-app-btn" onclick="addAppBlock()">+ إضافة تطبيق آخر للمقارنة</button>
+
+            <label>خاتمة المقال / الخلاصة والتوصية النهائية:</label>
+            <textarea id="articleOutro" rows="3" placeholder="اكتب الخلاصة والتوصية هنا..."></textarea>
+
+            <button type="submit" id="submitBtn" class="submit-btn">نشر المقال بالكامل</button>
+            <button type="button" id="cancelEditBtn" class="cancel-btn" onclick="resetForm()">إلغاء التعديل والعودة للوضع الافتراضي</button>
+        </form>
+        <div id="status"></div>
+    </div>
+
 </div>
 
 <script>
-    const SECRET_PASSWORD = "emosha2026";
+    const SECRET_PASSWORD = "123010111  55Ee";
+    const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles";
 
     function checkPassword() {
         const input = document.getElementById("passInput").value;
         if (input === SECRET_PASSWORD) {
             document.getElementById("loginBox").style.display = "none";
             document.getElementById("adminPanel").style.display = "block";
+            loadArticlesList();
         } else {
             document.getElementById("loginError").style.display = "block";
         }
     }
 
-    // تنظيف شامل للرابط واستخراج الرابط الصحيح لجوجل بلاي تلقائياً
     function cleanUrl(url) {
         if (!url) return "";
-        // إزالة أي أقواس ومسافات وعلامات تنصيص
-        let clean = url.replace(/[\[\]\(\)\`\'\"\s]/g, "").trim();
-        return clean;
+        return url.replace(/[\[\]\(\)\`\'\"\s]/g, "").trim();
     }
 
     let appCount = 0;
 
-    function addAppBlock() {
+    function addAppBlock(data = null) {
         appCount++;
         const container = document.getElementById("appsContainer");
         const div = document.createElement("div");
@@ -98,29 +123,115 @@
         div.innerHTML = `
             <h4>التطبيق رقم ${appCount}</h4>
             <label>اسم التطبيق:</label>
-            <input type="text" class="app-name" placeholder="مثال: CapCut" required>
+            <input type="text" class="app-name" value="${data ? data.name || '' : ''}" placeholder="مثال: CapCut" required>
 
             <label>أيقونة التطبيق (رابط صورة):</label>
-            <input type="text" class="app-icon" placeholder="https://example.com/icon.png">
+            <input type="text" class="app-icon" value="${data ? data.icon || '' : ''}" placeholder="https://example.com/icon.png">
 
             <label>شرح ومميزات التطبيق:</label>
-            <textarea class="app-desc" rows="3" placeholder="اكتب مميزات وشرح التطبيق..."></textarea>
+            <textarea class="app-desc" rows="3" placeholder="اكتب مميزات وشرح التطبيق...">${data ? data.desc || '' : ''}</textarea>
 
             <label>رابط التحميل المباشر من جوجل بلاي:</label>
-            <input type="text" class="app-link" placeholder="https://play.google.com/store/apps/details?id=..." required>
+            <input type="text" class="app-link" value="${data ? data.link || '' : ''}" placeholder="https://play.google.com/store/apps/details?id=..." required>
         `;
         container.appendChild(div);
     }
 
+    // جلب وحساب المقالات المنشورة
+    let loadedArticlesData = {};
+
+    function loadArticlesList() {
+        fetch(`${dbUrl}.json`)
+        .then(res => res.json())
+        .then(data => {
+            loadedArticlesData = data || {};
+            const listDiv = document.getElementById("articlesList");
+            if (!data) {
+                listDiv.innerHTML = "<p>لا توجد مقالات منشورة حالياً.</p>";
+                return;
+            }
+
+            let html = "";
+            Object.keys(data).reverse().forEach(key => {
+                const article = data[key];
+                html += `
+                    <div class="article-item">
+                        <div><strong>${article.title}</strong> <small style="color:#666">(${article.date || ''})</small></div>
+                        <div class="action-btns">
+                            <button class="btn-edit" onclick="editArticle('${key}')">تعديل</button>
+                            <button class="btn-delete" onclick="deleteArticle('${key}')">حذف</button>
+                        </div>
+                    </div>
+                `;
+            });
+            listDiv.innerHTML = html;
+        });
+    }
+
+    // بدء التعديل وسحب البيانات
+    function editArticle(key) {
+        const article = loadedArticlesData[key];
+        if (!article) return;
+
+        document.getElementById("editArticleKey").value = key;
+        document.getElementById("formTitle").innerText = "تعديل المقال الحالي";
+        document.getElementById("articleTitle").value = article.title;
+        document.getElementById("articleCover").value = article.cover || "";
+        document.getElementById("articleCategory").value = article.category;
+        document.getElementById("articleIntro").value = article.intro;
+        document.getElementById("articleOutro").value = article.outro || "";
+
+        document.getElementById("appsContainer").innerHTML = "";
+        appCount = 0;
+
+        if (article.apps && article.apps.length > 0) {
+            article.apps.forEach(app => addAppBlock(app));
+        } else {
+            addAppBlock();
+        }
+
+        document.getElementById("submitBtn").innerText = "حفظ التعديلات";
+        document.getElementById("submitBtn").style.background = "#ffc107";
+        document.getElementById("submitBtn").style.color = "#000";
+        document.getElementById("cancelEditBtn").style.display = "block";
+
+        window.scrollTo({ top: document.getElementById("adminPanel").offsetTop, behavior: 'smooth' });
+    }
+
+    // حذف مقال محدد
+    function deleteArticle(key) {
+        if (confirm("هل أنت تأكد من حذف هذا المقال نهائياً؟")) {
+            fetch(`${dbUrl}/${key}.json`, { method: "DELETE" })
+            .then(() => {
+                alert("تم حذف المقال بنجاح!");
+                loadArticlesList();
+            });
+        }
+    }
+
+    function resetForm() {
+        document.getElementById("editArticleKey").value = "";
+        document.getElementById("formTitle").innerText = "نشر مقال / مقارنة جديدة";
+        document.getElementById("articleForm").reset();
+        document.getElementById("appsContainer").innerHTML = "";
+        appCount = 0;
+        addAppBlock();
+        document.getElementById("submitBtn").innerText = "نشر المقال بالكامل";
+        document.getElementById("submitBtn").style.background = "#28a745";
+        document.getElementById("submitBtn").style.color = "#fff";
+        document.getElementById("cancelEditBtn").style.display = "none";
+    }
+
     addAppBlock();
 
-    const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles.json";
-
+    // حفظ أو تعديل المقال
     document.getElementById("articleForm").addEventListener("submit", function(e) {
         e.preventDefault();
         const statusDiv = document.getElementById("status");
         statusDiv.style.color = "blue";
-        statusDiv.innerText = "جاري نشر المقال...";
+        statusDiv.innerText = "جاري الحفظ...";
+
+        const editKey = document.getElementById("editArticleKey").value;
 
         const appBlocks = document.querySelectorAll(".app-block");
         const appsList = [];
@@ -144,23 +255,24 @@
             date: new Date().toLocaleDateString('ar-EG')
         };
 
-        fetch(dbUrl, {
-            method: "POST",
+        const targetUrl = editKey ? `${dbUrl}/${editKey}.json` : `${dbUrl}.json`;
+        const httpMethod = editKey ? "PUT" : "POST";
+
+        fetch(targetUrl, {
+            method: httpMethod,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(articleData)
         })
         .then(response => response.json())
         .then(data => {
             statusDiv.style.color = "green";
-            statusDiv.innerText = "تم نشر المقال والمقارنة بنجاح!";
-            document.getElementById("articleForm").reset();
-            document.getElementById("appsContainer").innerHTML = "";
-            appCount = 0;
-            addAppBlock();
+            statusDiv.innerText = editKey ? "تم تعديل المقال بنجاح!" : "تم نشر المقال بنجاح!";
+            resetForm();
+            loadArticlesList();
         })
         .catch(error => {
             statusDiv.style.color = "red";
-            statusDiv.innerText = "حدث خطأ أثناء النشر!";
+            statusDiv.innerText = "حدث خطأ أثناء الحفظ!";
             console.error(error);
         });
     });
