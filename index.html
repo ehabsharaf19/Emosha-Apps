@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إيموشا أبس - دليل وترشيحات التطبيقات</title>
+    <title>إيموشا أبس - مراجعات ومقارنات أفضل التطبيقات</title>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f4f6f9; margin: 0; padding: 0; direction: rtl; }
         header { background: #007bff; color: white; text-align: center; padding: 25px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         header h1 { margin: 0; font-size: 28px; }
         header p { margin: 8px 0 0; font-size: 15px; opacity: 0.9; }
-        .container { max-width: 1000px; margin: 25px auto; padding: 0 15px; }
-        .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .app-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
-        .app-card:hover { transform: translateY(-5px); }
-        .app-header { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
-        .app-icon { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; border: 1px solid #eee; }
-        .app-title-zone h3 { margin: 0; font-size: 18px; color: #222; }
-        .app-cat { font-size: 12px; color: #007bff; background: #eef5ff; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-top: 4px; }
-        .app-desc { color: #555; font-size: 14px; line-height: 1.6; height: 75px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin-bottom: 15px; }
-        .download-btn { display: block; text-align: center; background: #28a745; color: white; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: bold; transition: background 0.2s; }
+        .container { max-width: 850px; margin: 25px auto; padding: 0 15px; }
+        
+        .article-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .article-title { color: #007bff; margin-top: 0; font-size: 22px; border-bottom: 2px solid #eef5ff; padding-bottom: 10px; line-height: 1.4; }
+        .article-meta { font-size: 13px; color: #888; margin-bottom: 15px; }
+        .article-cover { width: 100%; max-height: 350px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+        .article-intro, .article-outro { font-size: 15px; line-height: 1.7; color: #444; background: #fafafa; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        
+        .app-item { border: 1px solid #e1e8ed; border-radius: 10px; padding: 18px; margin: 15px 0; background: #fff; }
+        .app-header { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+        .app-icon { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #ddd; }
+        .app-name { margin: 0; font-size: 18px; color: #222; }
+        .app-desc { font-size: 14px; line-height: 1.6; color: #555; white-space: pre-line; }
+        .download-btn { display: inline-block; background: #28a745; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; margin-top: 12px; font-size: 14px; text-align: center; }
         .download-btn:hover { background: #218838; }
+        
         #loading { text-align: center; font-size: 18px; color: #666; margin: 40px 0; }
     </style>
 </head>
@@ -28,52 +33,64 @@
 
 <header>
     <h1>إيموشا أبس - Emosha Apps</h1>
-    <p>مراجعات شاملة لأفضل التطبيقات والأدوات الذكية مع روابط التحميل الرسمية</p>
+    <p>دليلك الشامل ومقارنات أفضل التطبيقات والأدوات الذكية مع روابط التحميل المباشرة</p>
 </header>
 
 <div class="container">
-    <div id="loading">جاري تحميل التطبيقات والمراجعات...</div>
-    <div id="appsGrid" class="apps-grid"></div>
+    <div id="loading">جاري تحميل المقالات والمقارنات...</div>
+    <div id="articlesContainer"></div>
 </div>
 
 <script>
-    const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/apps.json";
+    const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles.json";
 
     fetch(dbUrl)
         .then(response => response.json())
         .then(data => {
             const loadingDiv = document.getElementById("loading");
-            const appsGrid = document.getElementById("appsGrid");
+            const container = document.getElementById("articlesContainer");
             loadingDiv.style.display = "none";
 
             if (!data) {
-                appsGrid.innerHTML = "<p style='grid-column: 1/-1; text-align: center;'>لا توجد تطبيقات مضافة حالياً. استخدم لوحة التحكم لإضافة أول تطبيق!</p>";
+                container.innerHTML = "<p style='text-align: center;'>لا توجد مقالات مضافة حالياً.</p>";
                 return;
             }
 
             let htmlContent = "";
             Object.keys(data).reverse().forEach(key => {
-                const app = data[key];
-                htmlContent += `
-                    <div class="app-card">
-                        <div>
-                            <div class="app-header">
-                                <img src="${app.icon}" alt="${app.title}" class="app-icon" onerror="this.src='https://via.placeholder.com/60'">
-                                <div class="app-title-zone">
-                                    <h3>${app.title}</h3>
-                                    <span class="app-cat">${app.category || 'عام'}</span>
+                const article = data[key];
+                
+                let appsHtml = "";
+                if (article.apps && article.apps.length > 0) {
+                    article.apps.forEach(app => {
+                        appsHtml += `
+                            <div class="app-item">
+                                <div class="app-header">
+                                    ${app.icon ? `<img src="${app.icon}" alt="${app.name}" class="app-icon" onerror="this.style.display='none'">` : ''}
+                                    <h3 class="app-name">${app.name}</h3>
                                 </div>
+                                <div class="app-desc">${app.desc}</div>
+                                ${app.link ? `<a href="${app.link}" target="_blank" rel="noopener noreferrer" class="download-btn">تحميل ${app.name} من جوجل بلاي</a>` : ''}
                             </div>
-                            <p class="app-desc">${app.description}</p>
-                        </div>
-                        <a href="${app.playUrl}" target="_blank" rel="noopener noreferrer" class="download-btn">تحميل من جوجل بلاي</a>
+                        `;
+                    });
+                }
+
+                htmlContent += `
+                    <div class="article-card">
+                        <h2 class="article-title">${article.title}</h2>
+                        <div class="article-meta">التصنيف: ${article.category} | التاريخ: ${article.date}</div>
+                        ${article.cover ? `<img src="${article.cover}" class="article-cover" alt="غلاف المقال" onerror="this.style.display='none'">` : ''}
+                        <div class="article-intro">${article.intro}</div>
+                        ${appsHtml}
+                        ${article.outro ? `<div class="article-outro"><strong>الخلاصة والتوصية:</strong> ${article.outro}</div>` : ''}
                     </div>
                 `;
             });
-            appsGrid.innerHTML = htmlContent;
+            container.innerHTML = htmlContent;
         })
         .catch(error => {
-            document.getElementById("loading").innerText = "حدث خطأ في تحميل البيانات!";
+            document.getElementById("loading").innerText = "حدث خطأ أثناء تحميل المقالات!";
             console.error(error);
         });
 </script>
