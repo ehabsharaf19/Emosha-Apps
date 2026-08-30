@@ -3,75 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض المقال</title>
+    <title>عرض المقال - إيموشا</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            direction: rtl;
-            text-align: right;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        /* تنسيق أزرار التنقل السليمة */
-        .article-navigation-buttons {
-            margin: 30px 0 20px 0;
-            text-align: center;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-        }
-        .article-navigation-buttons a {
-            display: inline-block;
-            padding: 12px 25px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: bold;
-            margin: 5px 10px;
-            transition: background 0.3s;
-        }
-        .btn-home {
-            background-color: #007bff;
-            color: #fff;
-        }
-        .btn-home:hover {
-            background-color: #0056b3;
-        }
-        .btn-back {
-            background-color: #e9ecef;
-            color: #333;
-        }
-        .btn-back:hover {
-            background-color: #dde2e6;
-        }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #f0f2f5; margin: 0; padding: 0; color: #333; direction: rtl; }
+        header { background: #007bff; color: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 19px; font-weight: bold; color: white; text-decoration: none; }
+        .nav-links { display: flex; gap: 10px; }
+        .nav-btn { color: white; text-decoration: none; font-size: 14px; font-weight: 500; background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 6px; }
+        
+        .container { max-width: 800px; margin: 25px auto; padding: 0 15px; }
+        .article-box { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .article-cover { width: 100%; height: 280px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+        .article-title { color: #1a252f; font-size: 24px; margin-bottom: 15px; font-weight: bold; line-height: 1.4; }
+        .article-meta { font-size: 13px; color: #888; margin-bottom: 20px; }
+        .article-intro { font-size: 16px; line-height: 1.8; color: #444; margin-bottom: 30px; }
+        
+        /* تصميم بطاقات التطبيقات داخل المقال */
+        .app-card { background: #f9f9f9; border: 1px solid #e1e1e1; border-radius: 10px; padding: 15px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 15px; }
+        .app-icon { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
+        .app-info { flex-grow: 1; }
+        .app-title { font-size: 18px; font-weight: bold; color: #333; margin: 0 0 5px 0; }
+        .app-desc { font-size: 14px; color: #666; line-height: 1.5; margin-bottom: 10px; }
+        .download-btn { display: inline-block; background: #28a745; color: white; text-decoration: none; padding: 6px 15px; border-radius: 5px; font-size: 13px; font-weight: bold; }
+        .download-btn:hover { background: #218838; }
+
+        .article-outro { font-size: 16px; line-height: 1.8; color: #444; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+
+        /* أزرار التنقل السفلى */
+        .article-navigation-buttons { margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; text-align: center; display: flex; justify-content: center; gap: 15px; }
+        .btn-home { background-color: #007bff; color: #fff; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 15px; }
+        .btn-home:hover { background-color: #0056b3; }
+        .btn-back { background-color: #e9ecef; color: #333; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 15px; }
+        .btn-back:hover { background-color: #dde2e6; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- مكان محتوى المقال وعنوانه -->
-        <div id="article-content">
-            <h1 id="article-title">عنوان المقال</h1>
-            <div id="article-body">
-                <!-- محتوى المقال والتطبيقات بيظهر هنا تلقائياً -->
-            </div>
-        </div>
-
-        <!-- أزرار الرجوع والتنقل السليمة والمباشرة -->
-        <div class="article-navigation-buttons">
-            <a href="index.html" class="btn-home">🏠 الصفحة الرئيسية</a>
-            <a href="javascript:history.back();" class="btn-back">⬅ العودة للصفحة السابقة</a>
+<header>
+    <div class="nav-container">
+        <a href="index.html" class="logo">إيموشا Emosha Apps</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn">📑 الرئيسية</a>
         </div>
     </div>
+</header>
+
+<div class="container">
+    <div class="article-box" id="articleContainer">
+        <p style="text-align: center; color: #666; padding: 40px;">جاري تحميل تفاصيل المقال...</p>
+    </div>
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const articleId = urlParams.get('id');
+    const dbUrl = `https://emosha-apps-default-rtdb.firebaseio.com/articles/${articleId}.json`;
+
+    if (!articleId) {
+        document.getElementById("articleContainer").innerHTML = "<p style='text-align:center; color:red;'>عذراً، المقال غير موجود.</p>";
+    } else {
+        fetch(dbUrl)
+        .then(res => res.json())
+        .then(article => {
+            if (!article) {
+                document.getElementById("articleContainer").innerHTML = "<p style='text-align:center; color:red;'>المقال المطلوب غير متوفر.</p>";
+                return;
+            }
+
+            let appsHtml = "";
+            if (article.apps && Array.isArray(article.apps)) {
+                article.apps.forEach(app => {
+                    appsHtml += `
+                        <div class="app-card">
+                            ${app.icon ? `<img src="${app.icon}" class="app-icon" alt="${app.name}">` : ''}
+                            <div class="app-info">
+                                <h3 class="app-title">${app.name}</h3>
+                                <p class="app-desc">${app.desc}</p>
+                                ${app.link ? `<a href="${app.link}" class="download-btn" target="_blank">تحميل التطبيق من المتجر ←</a>` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            const fullHtml = `
+                ${article.cover ? `<img src="${article.cover}" class="article-cover" alt="${article.title}">` : ''}
+                <span style="display:inline-block; background:#e7f1ff; color:#007bff; padding:4px 12px; border-radius:20px; font-size:13px; font-weight:bold; margin-bottom:10px;">${article.category || 'تطبيقات'}</span>
+                <h1 class="article-title">${article.title}</h1>
+                <div class="article-meta">تاريخ النشر: ${article.date || '2026'}</div>
+                <div class="article-intro">${article.intro || ''}</div>
+                
+                <div style="margin: 25px 0;">
+                    ${appsHtml}
+                </div>
+
+                ${article.outro ? `<div class="article-outro">${article.outro}</div>` : ''}
+
+                <!-- أزرار التنقل -->
+                <div class="article-navigation-buttons">
+                    <a href="index.html" class="btn-home">🏠 الصفحة الرئيسية</a>
+                    <a href="javascript:history.back();" class="btn-back">⬅ العودة للسابق</a>
+                </div>
+            `;
+
+            document.getElementById("articleContainer").innerHTML = fullHtml;
+        })
+        .catch(err => {
+            document.getElementById("articleContainer").innerHTML = "<p style='text-align:center; color:red;'>حدث خطأ أثناء جلب المقال.</p>";
+        });
+    }
+</script>
 
 </body>
 </html>
