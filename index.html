@@ -9,17 +9,16 @@
         body { background: #f0f2f5; margin: 0; padding: 0; color: #333; direction: rtl; }
         
         /* Header & Navigation */
-        header { background: #007bff; color: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); sticky: top; }
-        .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        header { background: #007bff; color: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 19px; font-weight: bold; color: white; text-decoration: none; }
         .nav-links { display: flex; gap: 10px; }
-        .nav-btn { color: white; text-decoration: none; font-size: 14px; font-weight: 500; background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 6px; display: flex; align-items: center; gap: 5px; }
-        .nav-btn:hover { background: rgba(255,255,255,0.3); }
+        .nav-btn { color: white; text-decoration: none; font-size: 14px; font-weight: 500; background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 6px; }
 
         /* Main Layout */
         .container { max-width: 800px; margin: 25px auto; padding: 0 15px; }
         
-        /* Article Cards (الرسومات والكروت المختصرة) */
+        /* Article Cards */
         .article-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .article-cover { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
         .article-badge { display: inline-block; background: #e7f1ff; color: #007bff; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; margin-bottom: 10px; }
@@ -28,6 +27,10 @@
         .article-snippet { color: #666; font-size: 14px; line-height: 1.6; margin-bottom: 15px; }
         .read-btn { display: block; background: #007bff; color: white; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; text-align: center; transition: background 0.2s; }
         .read-btn:hover { background: #0056b3; }
+
+        /* Load More Button */
+        .load-more-btn { display: none; margin: 30px auto; background: #28a745; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .load-more-btn:hover { background: #218838; }
 
         /* Page Content Styles */
         .page-content { display: none; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); line-height: 1.8; }
@@ -51,10 +54,13 @@
 
 <div class="container">
 
-    <!-- قائمة المقالات المختصرة -->
+    <!-- قائمة المقالات -->
     <div id="articlesContainer">
-        <p style="text-align: center; color: #666;">جاري تحميل دليل المقالات...</p>
+        <p style="text-align: center; color: #666;">جاري تحميل المقالات...</p>
     </div>
+
+    <!-- زر عرض المزيد -->
+    <button id="loadMoreBtn" class="load-more-btn" onclick="renderNextBatch()">عرض المزيد من المقالات ↓</button>
 
     <!-- الصفحات الجانبية -->
     <div id="aboutPage" class="page-content">
@@ -86,9 +92,15 @@
 
 <script>
     const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles.json";
+    
+    let allArticlesKeys = [];
+    let allArticlesData = {};
+    let currentIndex = 0;
+    const itemsPerPage = 5; // عدد المقالات في كل دفعة
 
     function showPage(pageId) {
         document.getElementById("articlesContainer").style.display = "none";
+        document.getElementById("loadMoreBtn").style.display = "none";
         document.querySelectorAll(".page-content").forEach(el => el.style.display = "none");
         document.getElementById(pageId).style.display = "block";
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -103,15 +115,28 @@
             return;
         }
 
-        let html = "";
-        Object.keys(data).reverse().forEach(key => {
-            const article = data[key];
-            const articleLink = `article.html?id=${key}`;
-            
-            // اقتطاع نبذة قصيرة جداً من المقدمة بدلاً من فتح المقال كله
-            let snippet = article.intro ? article.intro.substring(0, 130) + "..." : "اضغط بقراءة المقال لمعرفة التفاصيل والتطبيقات الموصى بها.";
+        allArticlesData = data;
+        allArticlesKeys = Object.keys(data).reverse(); // ترتيب من الأحدث للأقدم
+        container.innerHTML = ""; // تفريغ رسالة التحميل
 
-            html += `
+        renderNextBatch();
+    })
+    .catch(err => {
+        document.getElementById("articlesContainer").innerHTML = "<p style='text-align:center; color:red;'>حدث خطأ أثناء تحميل المقالات.</p>";
+    });
+
+    function renderNextBatch() {
+        const container = document.getElementById("articlesContainer");
+        const loadMoreBtn = document.getElementById("loadMoreBtn");
+        
+        const nextKeys = allArticlesKeys.slice(currentIndex, currentIndex + itemsPerPage);
+
+        nextKeys.forEach(key => {
+            const article = allArticlesData[key];
+            const articleLink = `article.html?id=${key}`;
+            let snippet = article.intro ? article.intro.substring(0, 130) + "..." : "اضغط لمشاهدة التفاصيل والتطبيقات الموصى بها.";
+
+            const articleHtml = `
                 <div class="article-card">
                     ${article.cover ? `<img src="${article.cover}" class="article-cover" alt="${article.title}">` : ''}
                     <span class="article-badge">${article.category || 'مقارنات'}</span>
@@ -121,13 +146,18 @@
                     <a href="${articleLink}" class="read-btn">اقرأ المقال كاملاً وشاهد التطبيقات ←</a>
                 </div>
             `;
+            container.innerHTML += articleHtml;
         });
 
-        container.innerHTML = html;
-    })
-    .catch(err => {
-        document.getElementById("articlesContainer").innerHTML = "<p style='text-align:center; color:red;'>حدث خطأ أثناء تحميل المقالات.</p>";
-    });
+        currentIndex += itemsPerPage;
+
+        // إخفاء أو إظهار زر "عرض المزيد" بناءً على وجود مقالات إضافية
+        if (currentIndex < allArticlesKeys.length) {
+            loadMoreBtn.style.display = "block";
+        } else {
+            loadMoreBtn.style.display = "none";
+        }
+    }
 </script>
 
 </body>
