@@ -3,76 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم - إضافة تطبيق جديد</title>
+    <title>لوحة التحكم - نشر مقال ومقارنة تطبيقات</title>
     <style>
         body { font-family: Arial, sans-serif; background: #f0f2f5; padding: 20px; direction: rtl; }
-        .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .form-container { max-width: 700px; margin: 0 auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         h2 { text-align: center; color: #007bff; margin-bottom: 20px; }
         label { display: block; margin-top: 15px; font-weight: bold; color: #333; }
         input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .app-block { background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px dashed #007bff; margin-top: 15px; }
+        .app-block h4 { margin: 0 0 10px; color: #007bff; }
         button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 16px; margin-top: 20px; cursor: pointer; font-weight: bold; }
-        button:hover { background: #218838; }
+        .add-app-btn { background: #17a2b8; margin-top: 10px; }
         #status { margin-top: 15px; text-align: center; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="form-container">
-    <h2>إضافة مراجعة تطبيق جديد</h2>
-    <form id="appForm">
-        <label>اسم التطبيق:</label>
-        <input type="text" id="appName" placeholder="مثال: CapCut" required>
+    <h2>نشر مقال / مقارنة تطبيقات جديدة</h2>
+    <form id="articleForm">
+        <label>عنوان المقال الرئيسي (مثال: مقارنة بين أفضل 3 تطبيقات مونتاج للهاتف):</label>
+        <input type="text" id="articleTitle" placeholder="اكتب عنوان المقال هنا..." required>
 
-        <label>رابط أيقونة التطبيق (صورة):</label>
-        <input type="url" id="appIcon" placeholder="https://example.com/icon.png" required>
+        <label>صورة الغلاف للمقال (رابط الصورة):</label>
+        <input type="url" id="articleCover" placeholder="https://example.com/cover.jpg" required>
 
         <label>التصنيف:</label>
-        <select id="appCategory">
+        <select id="articleCategory">
             <option value="تطبيقات المونتاج والتصميم">تطبيقات المونتاج والتصميم</option>
-            <option value="تطبيقات الإنتاجية">تطبيقات الإنتاجية</option>
             <option value="أدوات الذكاء الاصطناعي">أدوات الذكاء الاصطناعي</option>
-            <option value="ألعاب الجوال">ألعاب الجوال</option>
+            <option value="تطبيقات الإنتاجية">تطبيقات الإنتاجية</option>
+            <option value="مقارنات ومراجعات">مقارنات ومراجعات</option>
         </select>
 
-        <label>شرح التطبيق ومميزاته (المقال):</label>
-        <textarea id="appDesc" rows="6" placeholder="اكتب مراجعة شاملة ومميزات التطبيق هنا..." required></textarea>
+        <label>مقدمة المقال (تمهيد للمقارنة):</label>
+        <textarea id="articleIntro" rows="3" placeholder="اكتب مقدمة المقال هنا..." required></textarea>
 
-        <label>رابط التحميل المباشر من جوجل بلاي:</label>
-        <input type="url" id="playStoreUrl" placeholder="https://play.google.com/store/apps/details?id=..." required>
+        <div id="appsContainer">
+            <!-- سيتم إضافة بلوكات التطبيقات هنا -->
+        </div>
 
-        <button type="submit">نشر التطبيق</button>
+        <button type="button" class="add-app-btn" onclick="addAppBlock()">+ إضافة تطبيق آخر للمقارنة</button>
+
+        <label>خاتمة المقال / الخلاصة والتوصية النهائيّة:</label>
+        <textarea id="articleOutro" rows="3" placeholder="اكتب الخلاصة والتوصية هنا..."></textarea>
+
+        <button type="submit">نشر المقال بالكامل</button>
     </form>
     <div id="status"></div>
 </div>
 
 <script>
-    const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/apps.json";
+    let appCount = 0;
 
-    document.getElementById("appForm").addEventListener("submit", function(e) {
+    function addAppBlock() {
+        appCount++;
+        const container = document.getElementById("appsContainer");
+        const div = document.createElement("div");
+        div.className = "app-block";
+        div.id = `appBlock_${appCount}`;
+        div.innerHTML = `
+            <h4>التطبيق رقم ${appCount}</h4>
+            <label>اسم التطبيق:</label>
+            <input type="text" class="app-name" placeholder="مثال: CapCut" required>
+
+            <label>أيقونة التطبيق (رابط صورة):</label>
+            <input type="url" class="app-icon" placeholder="https://example.com/capcut-icon.png">
+
+            <label>شرح ومميزات التطبيق (مراجعة التطبيق):</label>
+            <textarea class="app-desc" rows="3" placeholder="اكتب مميزات وسلبيات التطبيق هنا..."></textarea>
+
+            <label>رابط التحميل المباشر من جوجل بلاي:</label>
+            <input type="url" class="app-link" placeholder="https://play.google.com/store/apps/details?id=..." required>
+        `;
+        container.appendChild(div);
+    }
+
+    // إضافة أول تطبيق تلقائياً عند فتح الصفحة
+    addAppBlock();
+
+    const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles.json";
+
+    document.getElementById("articleForm").addEventListener("submit", function(e) {
         e.preventDefault();
         const statusDiv = document.getElementById("status");
         statusDiv.style.color = "blue";
-        statusDiv.innerText = "جاري النشر...";
+        statusDiv.innerText = "جاري نشر المقال...";
 
-        const appData = {
-            title: document.getElementById("appName").value,
-            icon: document.getElementById("appIcon").value,
-            category: document.getElementById("appCategory").value,
-            description: document.getElementById("appDesc").value,
-            playUrl: document.getElementById("playStoreUrl").value,
+        const appBlocks = document.querySelectorAll(".app-block");
+        const appsList = [];
+
+        appBlocks.forEach(block => {
+            appsList.push({
+                name: block.querySelector(".app-name").value,
+                icon: block.querySelector(".app-icon").value,
+                desc: block.querySelector(".app-desc").value,
+                link: block.querySelector(".app-link").value
+            });
+        });
+
+        const articleData = {
+            title: document.getElementById("articleTitle").value,
+            cover: document.getElementById("articleCover").value,
+            category: document.getElementById("articleCategory").value,
+            intro: document.getElementById("articleIntro").value,
+            apps: appsList,
+            outro: document.getElementById("articleOutro").value,
             date: new Date().toLocaleDateString('ar-EG')
         };
 
         fetch(dbUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(appData)
+            body: JSON.stringify(articleData)
         })
         .then(response => response.json())
         .then(data => {
             statusDiv.style.color = "green";
-            statusDiv.innerText = "تم نشر التطبيق بنجاح!";
-            document.getElementById("appForm").reset();
+            statusDiv.innerText = "تم نشر المقال والمقارنة بنجاح!";
+            document.getElementById("articleForm").reset();
+            document.getElementById("appsContainer").innerHTML = "";
+            appCount = 0;
+            addAppBlock();
         })
         .catch(error => {
             statusDiv.style.color = "red";
