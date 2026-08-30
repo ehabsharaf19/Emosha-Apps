@@ -8,41 +8,27 @@
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: #f0f2f5; margin: 0; padding: 0; color: #333; direction: rtl; }
         
-        /* Header */
         header { background: #007bff; color: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 20px; font-weight: bold; color: white; text-decoration: none; }
-        .home-btn { color: white; text-decoration: none; font-size: 15px; font-weight: 500; background: rgba(255,255,255,0.2); padding: 6px 15px; border-radius: 4px; }
+        .nav-container { max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 19px; font-weight: bold; color: white; text-decoration: none; }
+        .home-btn { color: white; text-decoration: none; font-size: 14px; background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 6px; }
 
-        /* Main Layout */
-        .container { max-width: 900px; margin: 25px auto; padding: 0 15px; }
-        .article-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .article-title { color: #007bff; font-size: 26px; margin-top: 0; margin-bottom: 10px; line-height: 1.4; }
-        .article-meta { font-size: 13px; color: #777; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .cover-img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
-        .intro-text, .outro-text { font-size: 16px; line-height: 1.8; color: #444; background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .container { max-width: 800px; margin: 25px auto; padding: 0 15px; }
+        .article-card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .article-title { color: #007bff; font-size: 24px; margin-top: 0; line-height: 1.4; }
+        .article-meta { font-size: 12px; color: #777; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .cover-img { width: 100%; max-height: 380px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+        .intro-text, .outro-text { font-size: 15px; line-height: 1.8; color: #444; background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
         
-        /* App Cards */
-        .app-card { background: #fff; border: 1px solid #e9ecef; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-        .app-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .app-icon { width: 55px; height: 55px; border-radius: 12px; object-fit: cover; border: 1px solid #ddd; background: #e9ecef; }
-        .app-name { font-size: 20px; font-weight: bold; color: #222; margin: 0; }
-        .app-desc { font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 15px; }
-        .download-btn { display: inline-block; background: #28a745; color: white; text-decoration: none; padding: 12px 25px; border-radius: 6px; font-weight: bold; text-align: center; transition: background 0.2s; width: 100%; }
-        .download-btn:hover { background: #218838; }
+        .app-card { background: #fff; border: 1px solid #e9ecef; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .app-header { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
+        .app-icon { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; border: 1px solid #ddd; background: #eee; }
+        .app-name { font-size: 18px; font-weight: bold; color: #222; margin: 0; }
+        .app-desc { font-size: 14px; line-height: 1.7; color: #555; margin-bottom: 15px; }
+        .download-btn { display: block; background: #28a745; color: white; text-decoration: none; padding: 10px; border-radius: 6px; font-weight: bold; text-align: center; }
 
-        /* Related Articles Section */
-        .related-section { margin-top: 40px; border-top: 2px solid #e9ecef; padding-top: 20px; }
-        .related-title { font-size: 20px; color: #007bff; margin-bottom: 15px; font-weight: bold; }
-        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-        .related-card { background: white; border: 1px solid #eee; border-radius: 8px; padding: 15px; text-decoration: none; color: #333; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.03); transition: transform 0.2s; }
-        .related-card:hover { transform: translateY(-3px); border-color: #007bff; }
-        .related-card h4 { margin: 0 0 10px 0; color: #1a252f; font-size: 15px; line-height: 1.4; }
-        .related-card span { font-size: 12px; color: #007bff; font-weight: bold; }
-
-        /* Footer */
-        footer { background: #1a252f; color: #aaa; text-align: center; padding: 25px 15px; margin-top: 40px; font-size: 14px; }
-        footer a { color: #fff; text-decoration: none; margin: 0 8px; }
+        footer { background: #1a252f; color: #aaa; text-align: center; padding: 20px; margin-top: 40px; font-size: 14px; }
+        footer a { color: #fff; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -50,7 +36,7 @@
 <header>
     <div class="nav-container">
         <a href="index.html" class="logo">إيموشا Emosha Apps</a>
-        <a href="index.html" class="home-btn">الرئيسية</a>
+        <a href="index.html" class="home-btn">📑 المقالات</a>
     </div>
 </header>
 
@@ -58,29 +44,21 @@
     <div id="singleArticleContainer">
         <p style="text-align: center; color: #666;">جاري تحميل المقال...</p>
     </div>
-
-    <!-- قسم المقالات المقترحة أسفل الصفحة -->
-    <div class="related-section" id="relatedSection" style="display:none;">
-        <div class="related-title">مقالات ومقارنات قد تعجبك:</div>
-        <div class="related-grid" id="relatedContainer"></div>
-    </div>
 </div>
 
 <footer>
-    <div>جميع الحقوق محفوظة © 2026 - إيموشا Emosha Apps</div>
+    <div><a href="index.html">الرئيسية</a> | جميع الحقوق محفوظة © 2026 - إيموشا Emosha Apps</div>
 </footer>
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const articleId = urlParams.get('id');
-    const allArticlesUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles.json";
 
     if (!articleId) {
         window.location.href = "index.html";
     } else {
         const dbUrl = `https://emosha-apps-default-rtdb.firebaseio.com/articles/${articleId}.json`;
 
-        // جلب المقال الحالي
         fetch(dbUrl)
         .then(res => res.json())
         .then(article => {
@@ -103,7 +81,7 @@
                                 <h3 class="app-name">${app.name}</h3>
                             </div>
                             <div class="app-desc">${app.desc}</div>
-                            <a href="${app.link}" target="_blank" rel="noopener noreferrer" class="download-btn">تحميل ${app.name} من جوجل بلاي</a>
+                            <a href="${app.link}" target="_blank" class="download-btn">تحميل ${app.name} من جوجل بلاي</a>
                         </div>
                     `;
                 });
@@ -112,7 +90,7 @@
             const html = `
                 <div class="article-card">
                     <h1 class="article-title">${article.title}</h1>
-                    <div class="article-meta">التصنيف: ${article.category || 'عام'} | التاريخ: ${article.date || ''}</div>
+                    <div class="article-meta">التصنيف: ${article.category || 'مقارنات'} | التاريخ: ${article.date || '2026'}</div>
                     ${article.cover ? `<img src="${article.cover}" class="cover-img" alt="${article.title}">` : ''}
                     <div class="intro-text">${article.intro}</div>
                     ${appsHtml}
@@ -121,41 +99,6 @@
             `;
 
             document.getElementById("singleArticleContainer").innerHTML = html;
-
-            // جلب باقي المقالات المقترحة
-            loadRelatedArticles(articleId);
-        })
-        .catch(err => {
-            document.getElementById("singleArticleContainer").innerHTML = "<p style='text-align:center; color:red;'>حدث خطأ أثناء تحميل المقال.</p>";
-        });
-    }
-
-    function loadRelatedArticles(currentId) {
-        fetch(allArticlesUrl)
-        .then(res => res.json())
-        .then(data => {
-            if (!data) return;
-            
-            let relatedHtml = "";
-            let count = 0;
-
-            Object.keys(data).reverse().forEach(key => {
-                if (key !== currentId && count < 3) { // عرض حتى 3 مقالات أُخرى
-                    const item = data[key];
-                    relatedHtml += `
-                        <a href="article.html?id=${key}" class="related-card">
-                            <h4>${item.title}</h4>
-                            <span>اقرأ المقال ←</span>
-                        </a>
-                    `;
-                    count++;
-                }
-            });
-
-            if (count > 0) {
-                document.getElementById("relatedContainer").innerHTML = relatedHtml;
-                document.getElementById("relatedSection").style.display = "block";
-            }
         });
     }
 </script>
