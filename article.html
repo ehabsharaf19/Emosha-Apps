@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض المقال - إيموشا Emosha Apps</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #f0f2f5; margin: 0; padding: 0; color: #333; direction: rtl; }
+        
+        /* Header */
+        header { background: #007bff; color: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: bold; color: white; text-decoration: none; }
+        .home-btn { color: white; text-decoration: none; font-size: 15px; font-weight: 500; background: rgba(255,255,255,0.2); padding: 6px 15px; border-radius: 4px; }
+
+        /* Main Layout */
+        .container { max-width: 900px; margin: 25px auto; padding: 0 15px; }
+        .article-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .article-title { color: #007bff; font-size: 26px; margin-top: 0; margin-bottom: 10px; line-height: 1.4; }
+        .article-meta { font-size: 13px; color: #777; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .cover-img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+        .intro-text, .outro-text { font-size: 16px; line-height: 1.8; color: #444; background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        
+        /* App Cards */
+        .app-card { background: #fff; border: 1px solid #e9ecef; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .app-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .app-icon { width: 55px; height: 55px; border-radius: 12px; object-fit: cover; border: 1px solid #ddd; background: #e9ecef; }
+        .app-name { font-size: 20px; font-weight: bold; color: #222; margin: 0; }
+        .app-desc { font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 15px; }
+        .download-btn { display: inline-block; background: #28a745; color: white; text-decoration: none; padding: 12px 25px; border-radius: 6px; font-weight: bold; text-align: center; transition: background 0.2s; width: 100%; }
+        .download-btn:hover { background: #218838; }
+
+        /* Footer */
+        footer { background: #1a252f; color: #aaa; text-align: center; padding: 25px 15px; margin-top: 40px; font-size: 14px; }
+        footer a { color: #fff; text-decoration: none; margin: 0 8px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-container">
+        <a href="index.html" class="logo">إيموشا Emosha Apps</a>
+        <a href="index.html" class="home-btn">الرئيسية</a>
+    </div>
+</header>
+
+<div class="container">
+    <div id="singleArticleContainer">
+        <p style="text-align: center; color: #666;">جاري تحميل المقال...</p>
+    </div>
+</div>
+
+<footer>
+    <div>جميع الحقوق محفوظة © 2026 - إيموشا Emosha Apps</div>
+</footer>
+
+<script>
+    // الحصول على id المقال من الرابط
+    const urlParams = new URLSearchParams(window.location.search);
+    const articleId = urlParams.get('id');
+
+    if (!articleId) {
+        window.location.href = "index.html";
+    } else {
+        const dbUrl = `https://emosha-apps-default-rtdb.firebaseio.com/articles/${articleId}.json`;
+
+        fetch(dbUrl)
+        .then(res => res.json())
+        .then(article => {
+            if (!article) {
+                document.getElementById("singleArticleContainer").innerHTML = "<p style='text-align:center; color:red;'>المقال غير موجود!</p>";
+                return;
+            }
+
+            // تحديث عنوان الصفحة برقم/عنوان المقال لـ SEO
+            document.title = `${article.title} - إيموشا Emosha Apps`;
+
+            let appsHtml = "";
+            if (article.apps && article.apps.length > 0) {
+                article.apps.forEach((app) => {
+                    const iconUrl = app.icon && app.icon.trim() !== "" ? app.icon : "https://cdn-icons-png.flaticon.com/512/2589/2589175.png";
+                    
+                    appsHtml += `
+                        <div class="app-card">
+                            <div class="app-header">
+                                <img src="${iconUrl}" class="app-icon" alt="${app.name}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2589/2589175.png'">
+                                <h3 class="app-name">${app.name}</h3>
+                            </div>
+                            <div class="app-desc">${app.desc}</div>
+                            <a href="${app.link}" target="_blank" rel="noopener noreferrer" class="download-btn">تحميل ${app.name} من جوجل بلاي</a>
+                        </div>
+                    `;
+                });
+            }
+
+            const html = `
+                <div class="article-card">
+                    <h1 class="article-title">${article.title}</h1>
+                    <div class="article-meta">التصنيف: ${article.category || 'عام'} | التاريخ: ${article.date || ''}</div>
+                    ${article.cover ? `<img src="${article.cover}" class="cover-img" alt="${article.title}">` : ''}
+                    <div class="intro-text">${article.intro}</div>
+                    ${appsHtml}
+                    ${article.outro ? `<div class="outro-text"><strong>الخلاصة والتوصية:</strong><br>${article.outro}</div>` : ''}
+                </div>
+            `;
+
+            document.getElementById("singleArticleContainer").innerHTML = html;
+        })
+        .catch(err => {
+            document.getElementById("singleArticleContainer").innerHTML = "<p style='text-align:center; color:red;'>حدث خطأ أثناء تحميل المقال.</p>";
+        });
+    }
+</script>
+
+</body>
+</html>
