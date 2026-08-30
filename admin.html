@@ -8,14 +8,12 @@
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: #f0f2f5; margin: 0; padding: 20px; direction: rtl; }
         
-        /* شاشة تسجيل الدخول */
         #loginBox { max-width: 400px; margin: 80px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
         #loginBox h3 { color: #007bff; margin-top: 0; }
         #loginBox input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; text-align: center; }
         #loginBox button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
         #loginError { color: red; font-size: 14px; margin-top: 10px; display: none; }
 
-        /* لوحة التحكم */
         #adminPanel { display: none; max-width: 750px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         h2 { text-align: center; color: #007bff; margin-bottom: 20px; }
         label { display: block; margin-top: 15px; font-weight: bold; color: #333; }
@@ -29,7 +27,6 @@
 </head>
 <body>
 
-<!-- نافذة تسجيل الدخول -->
 <div id="loginBox">
     <h3>لوحة تحكم إيموشا أبس</h3>
     <p>أدخل كلمة المرور للمتابعة:</p>
@@ -38,15 +35,14 @@
     <div id="loginError">كلمة المرور غير صحيحة!</div>
 </div>
 
-<!-- لوحة التحكم المحمية -->
 <div id="adminPanel">
     <h2>نشر مقال / مقارنة تطبيقات جديدة</h2>
     <form id="articleForm">
-        <label>عنوان المقال الرئيسي (مثال: مقارنة بين أفضل 3 تطبيقات مونتاج للهاتف):</label>
+        <label>عنوان المقال الرئيسي:</label>
         <input type="text" id="articleTitle" placeholder="اكتب عنوان المقال هنا..." required>
 
         <label>صورة الغلاف للمقال (رابط الصورة):</label>
-        <input type="url" id="articleCover" placeholder="https://example.com/cover.jpg" required>
+        <input type="text" id="articleCover" placeholder="https://example.com/cover.jpg">
 
         <label>التصنيف:</label>
         <select id="articleCategory">
@@ -72,7 +68,6 @@
 </div>
 
 <script>
-    // كلمة المرور المطلوبة لدخول الصفحة
     const SECRET_PASSWORD = "123010111  55Ee";
 
     function checkPassword() {
@@ -83,6 +78,12 @@
         } else {
             document.getElementById("loginError").style.display = "block";
         }
+    }
+
+    // تنظيف الروابط من الأقواس الزائدة تلقائياً
+    function cleanUrl(url) {
+        if (!url) return "";
+        return url.replace(/[\[\]\(\)\s]/g, "").trim();
     }
 
     let appCount = 0;
@@ -98,18 +99,17 @@
             <input type="text" class="app-name" placeholder="مثال: CapCut" required>
 
             <label>أيقونة التطبيق (رابط صورة):</label>
-            <input type="url" class="app-icon" placeholder="https://example.com/icon.png">
+            <input type="text" class="app-icon" placeholder="https://example.com/icon.png">
 
             <label>شرح ومميزات التطبيق:</label>
             <textarea class="app-desc" rows="3" placeholder="اكتب مميزات وشرح التطبيق..."></textarea>
 
             <label>رابط التحميل المباشر من جوجل بلاي:</label>
-            <input type="url" class="app-link" placeholder="https://play.google.com/store/apps/details?id=..." required>
+            <input type="text" class="app-link" placeholder="https://play.google.com/store/apps/details?id=..." required>
         `;
         container.appendChild(div);
     }
 
-    // إضافة أول بلوك تطبيق عند تحميل لوحة التحكم
     addAppBlock();
 
     const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles.json";
@@ -126,15 +126,15 @@
         appBlocks.forEach(block => {
             appsList.push({
                 name: block.querySelector(".app-name").value,
-                icon: block.querySelector(".app-icon").value,
+                icon: cleanUrl(block.querySelector(".app-icon").value),
                 desc: block.querySelector(".app-desc").value,
-                link: block.querySelector(".app-link").value
+                link: cleanUrl(block.querySelector(".app-link").value)
             });
         });
 
         const articleData = {
             title: document.getElementById("articleTitle").value,
-            cover: document.getElementById("articleCover").value,
+            cover: cleanUrl(document.getElementById("articleCover").value),
             category: document.getElementById("articleCategory").value,
             intro: document.getElementById("articleIntro").value,
             apps: appsList,
