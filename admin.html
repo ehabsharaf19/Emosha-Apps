@@ -68,7 +68,7 @@
 </div>
 
 <script>
-    const SECRET_PASSWORD = "123010111  55Ee";
+    const SECRET_PASSWORD = "emosha2026";
 
     function checkPassword() {
         const input = document.getElementById("passInput").value;
@@ -80,10 +80,12 @@
         }
     }
 
-    // تنظيف الروابط من الأقواس الزائدة تلقائياً
+    // تنظيف شامل للرابط واستخراج الرابط الصحيح لجوجل بلاي تلقائياً
     function cleanUrl(url) {
         if (!url) return "";
-        return url.replace(/[\[\]\(\)\s]/g, "").trim();
+        // إزالة أي أقواس ومسافات وعلامات تنصيص
+        let clean = url.replace(/[\[\]\(\)\`\'\"\s]/g, "").trim();
+        return clean;
     }
 
     let appCount = 0;
