@@ -3,95 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إيموشا Emosha Apps - دليل ومقارنات أفضل التطبيقات 2026</title>
+    <title>إيموشا Emosha Apps - دليل ومقارنات أفضل التطبيقات</title>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: #f0f2f5; margin: 0; padding: 0; color: #333; direction: rtl; }
         
-        /* Header */
-        header { background: #007bff; color: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        /* Header & Navigation */
+        header { background: #007bff; color: white; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); sticky: top; }
         .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 20px; font-weight: bold; color: white; text-decoration: none; }
-        .logo span { font-size: 13px; opacity: 0.9; font-weight: normal; margin-right: 5px; }
+        .logo { font-size: 19px; font-weight: bold; color: white; text-decoration: none; }
+        .nav-links { display: flex; gap: 10px; }
+        .nav-btn { color: white; text-decoration: none; font-size: 14px; font-weight: 500; background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 6px; display: flex; align-items: center; gap: 5px; }
+        .nav-btn:hover { background: rgba(255,255,255,0.3); }
 
         /* Main Layout */
-        .container { max-width: 900px; margin: 25px auto; padding: 0 15px; }
+        .container { max-width: 800px; margin: 25px auto; padding: 0 15px; }
         
-        /* Article Preview Cards */
-        .article-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 15px; }
-        .article-cover { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; }
-        .article-category { display: inline-block; background: #e7f1ff; color: #007bff; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; width: fit-content; }
-        .article-title { color: #1a252f; font-size: 22px; margin: 5px 0; line-height: 1.4; text-decoration: none; font-weight: bold; }
-        .article-title:hover { color: #007bff; }
-        .article-meta { font-size: 13px; color: #888; margin-bottom: 10px; }
-        .article-intro { color: #555; line-height: 1.6; font-size: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        .read-more-btn { display: inline-block; background: #007bff; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; text-align: center; width: fit-content; margin-top: 10px; transition: background 0.2s; }
-        .read-more-btn:hover { background: #0056b3; }
+        /* Article Cards (الرسومات والكروت المختصرة) */
+        .article-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .article-cover { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+        .article-badge { display: inline-block; background: #e7f1ff; color: #007bff; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; margin-bottom: 10px; }
+        .article-title { color: #1a252f; font-size: 20px; margin: 0 0 10px 0; line-height: 1.4; font-weight: bold; }
+        .article-meta { font-size: 12px; color: #888; margin-bottom: 12px; }
+        .article-snippet { color: #666; font-size: 14px; line-height: 1.6; margin-bottom: 15px; }
+        .read-btn { display: block; background: #007bff; color: white; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; text-align: center; transition: background 0.2s; }
+        .read-btn:hover { background: #0056b3; }
 
-        /* Bottom Pages Content */
+        /* Page Content Styles */
         .page-content { display: none; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); line-height: 1.8; }
         .page-content h2 { color: #007bff; margin-top: 0; }
 
         /* Footer */
         footer { background: #1a252f; color: #aaa; text-align: center; padding: 25px 15px; margin-top: 40px; font-size: 14px; }
         footer a { color: #fff; text-decoration: none; margin: 0 8px; }
-        footer a:hover { text-decoration: underline; }
-        .footer-links { margin-bottom: 12px; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="nav-container">
-        <a href="#" onclick="showHome()" class="logo">
-            إيموشا Emosha Apps <span>| دليل ومقارنات أفضل التطبيقات</span>
-        </a>
+        <a href="index.html" class="logo">إيموشا Emosha Apps</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-btn">📑 المقالات</a>
+        </div>
     </div>
 </header>
 
 <div class="container">
 
-    <!-- قسم المقالات الرئيسية (عرض مختصر) -->
+    <!-- قائمة المقالات المختصرة -->
     <div id="articlesContainer">
-        <p style="text-align: center; color: #666;">جاري تحميل المقالات...</p>
+        <p style="text-align: center; color: #666;">جاري تحميل دليل المقالات...</p>
     </div>
 
-    <!-- صفحة من نحن -->
+    <!-- الصفحات الجانبية -->
     <div id="aboutPage" class="page-content">
         <h2>من نحن</h2>
-        <p>مرحباً بكم في منصة <strong>إيموشا Emosha Apps</strong>، المنصة المتخصصة في تقديم المراجعات والمقارنات الشاملة لأحدث تطبيقات الهواتف الذكية، أدوات المونتاج، وتطبيقات الذكاء الاصطناعي.</p>
-        <p>نهدف إلى مساعدة المستخدم العربي وصناع المحتوى في اختيار أفضل التطبيقات والبرامج التي تناسب احتياجاتهم اليومية والاحترافية من خلال تقديم شرح مبسط ومباشر وروابط تحميل آمنة ورسمية دائماً.</p>
+        <p>مرحباً بكم في منصة <strong>إيموشا Emosha Apps</strong>، المنصة المتخصصة في تقديم المراجعات والمقارنات الشاملة لأحدث تطبيقات الهواتف الذكية.</p>
     </div>
 
-    <!-- صفحة سياسة الخصوصية -->
     <div id="privacyPage" class="page-content">
         <h2>سياسة الخصوصية</h2>
-        <p><small style="color: #777;">آخر تحديث: أغسطس 2026</small></p>
-        <p>في منصة <strong>إيموشا Emosha Apps</strong>، نولي أهمية قصوى لحماية خصوصية زوارنا والالتزام بالشفافية الكاملة:</p>
-        <h3>1. جمع المعلومات</h3>
-        <p>نحن لا نجمع أي بيانات شخصية محددة للهوية إلا إذا قمت بالتواصل معنا طواعية عبر وسائل الاتصال المتاحة.</p>
-        <h3>2. ملفات تعريف الارتباط (Cookies)</h3>
-        <p>قد يستخدم موقعنا ملفات تعريف الارتباط لتحسين تجربة التصفح وتذكر تفضيلاتك.</p>
-        <h3>3. الإعلانات (Google AdSense)</h3>
-        <p>نستخدم شركات إعلانية خارجية مثل Google AdSense لعرض الإعلانات عند زيارة موقعنا.</p>
-        <h3>4. الروابط الخارجية للمتجر</h3>
-        <p>تتضمن مقالاتنا روابط توجهك مباشرة إلى المتاجر الرسمية المعتمدة (مثل Google Play Store).</p>
+        <p>نحن نحترم خصوصيتك ونلتزم بشفافية كاملة في استخدام الإعلانات المعتمدة من Google AdSense.</p>
     </div>
 
-    <!-- صفحة اتصل بنا -->
     <div id="contactPage" class="page-content">
         <h2>اتصل بنا</h2>
-        <p>إذا كان لديك أي استفسار، اقتراح، أو رغبة في التواصل مع إدارة الموقع، يمكنك مراسلتنا عبر البريد الإلكتروني الرسمي:</p>
-        <p style="background: #f8f9fa; padding: 15px; border-radius: 6px; font-weight: bold; color: #007bff; text-align: center; direction: ltr;">
-            ehabsharaf28@gmail.com
-        </p>
+        <p>يمكنكم التواصل معنا عبر البريد الإلكتروني الرسمي: <strong>ehabsharaf28@gmail.com</strong></p>
     </div>
 
 </div>
 
 <footer>
-    <div class="footer-links">
-        <a href="#" onclick="showHome()">الرئيسية</a> | 
+    <div style="margin-bottom: 10px;">
+        <a href="index.html">الرئيسية</a> | 
         <a href="#" onclick="showPage('aboutPage')">من نحن</a> | 
         <a href="#" onclick="showPage('privacyPage')">سياسة الخصوصية</a> | 
         <a href="#" onclick="showPage('contactPage')">اتصل بنا</a>
@@ -101,12 +86,6 @@
 
 <script>
     const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles.json";
-
-    function showHome() {
-        document.getElementById("articlesContainer").style.display = "block";
-        document.querySelectorAll(".page-content").forEach(el => el.style.display = "none");
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
 
     function showPage(pageId) {
         document.getElementById("articlesContainer").style.display = "none";
@@ -127,18 +106,19 @@
         let html = "";
         Object.keys(data).reverse().forEach(key => {
             const article = data[key];
-            const articleUrl = `article.html?id=${key}`;
+            const articleLink = `article.html?id=${key}`;
             
+            // اقتطاع نبذة قصيرة جداً من المقدمة بدلاً من فتح المقال كله
+            let snippet = article.intro ? article.intro.substring(0, 130) + "..." : "اضغط بقراءة المقال لمعرفة التفاصيل والتطبيقات الموصى بها.";
+
             html += `
                 <div class="article-card">
                     ${article.cover ? `<img src="${article.cover}" class="article-cover" alt="${article.title}">` : ''}
-                    <div>
-                        <span class="article-category">${article.category || 'عام'}</span>
-                        <a href="${articleUrl}" class="article-title"><h2>${article.title}</h2></a>
-                        <div class="article-meta">تاريخ النشر: ${article.date || ''}</div>
-                        <div class="article-intro">${article.intro}</div>
-                        <a href="${articleUrl}" class="read-more-btn">اقرأ المقال كاملاً والتطبيقات ←</a>
-                    </div>
+                    <span class="article-badge">${article.category || 'مقارنات'}</span>
+                    <h2 class="article-title">${article.title}</h2>
+                    <div class="article-meta">تاريخ النشر: ${article.date || '2026'}</div>
+                    <div class="article-snippet">${snippet}</div>
+                    <a href="${articleLink}" class="read-btn">اقرأ المقال كاملاً وشاهد التطبيقات ←</a>
                 </div>
             `;
         });
@@ -146,7 +126,7 @@
         container.innerHTML = html;
     })
     .catch(err => {
-        document.getElementById("articlesContainer").innerHTML = "<p style='text-align:center; color:red;'>حدث خطأ أثناء تحميل البيانات.</p>";
+        document.getElementById("articlesContainer").innerHTML = "<p style='text-align:center; color:red;'>حدث خطأ أثناء تحميل المقالات.</p>";
     });
 </script>
 
