@@ -3,23 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم - نشر مقال ومقارنة تطبيقات</title>
+    <title>لوحة التحكم - نشر المقالات والمقارنات</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f0f2f5; padding: 20px; direction: rtl; }
-        .form-container { max-width: 700px; margin: 0 auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #f0f2f5; margin: 0; padding: 20px; direction: rtl; }
+        
+        /* شاشة تسجيل الدخول */
+        #loginBox { max-width: 400px; margin: 80px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        #loginBox h3 { color: #007bff; margin-top: 0; }
+        #loginBox input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; text-align: center; }
+        #loginBox button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
+        #loginError { color: red; font-size: 14px; margin-top: 10px; display: none; }
+
+        /* لوحة التحكم */
+        #adminPanel { display: none; max-width: 750px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         h2 { text-align: center; color: #007bff; margin-bottom: 20px; }
         label { display: block; margin-top: 15px; font-weight: bold; color: #333; }
-        input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        .app-block { background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px dashed #007bff; margin-top: 15px; }
+        input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; }
+        .app-block { background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px dashed #007bff; margin-top: 15px; }
         .app-block h4 { margin: 0 0 10px; color: #007bff; }
-        button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 16px; margin-top: 20px; cursor: pointer; font-weight: bold; }
-        .add-app-btn { background: #17a2b8; margin-top: 10px; }
+        .submit-btn { width: 100%; padding: 14px; background: #28a745; color: white; border: none; border-radius: 6px; font-size: 17px; margin-top: 20px; cursor: pointer; font-weight: bold; }
+        .add-app-btn { width: 100%; padding: 10px; background: #17a2b8; color: white; border: none; border-radius: 6px; margin-top: 15px; cursor: pointer; font-weight: bold; }
         #status { margin-top: 15px; text-align: center; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="form-container">
+<!-- نافذة تسجيل الدخول -->
+<div id="loginBox">
+    <h3>لوحة تحكم إيموشا أبس</h3>
+    <p>أدخل كلمة المرور للمتابعة:</p>
+    <input type="password" id="passInput" placeholder="كلمة المرور">
+    <button onclick="checkPassword()">دخول</button>
+    <div id="loginError">كلمة المرور غير صحيحة!</div>
+</div>
+
+<!-- لوحة التحكم المحمية -->
+<div id="adminPanel">
     <h2>نشر مقال / مقارنة تطبيقات جديدة</h2>
     <form id="articleForm">
         <label>عنوان المقال الرئيسي (مثال: مقارنة بين أفضل 3 تطبيقات مونتاج للهاتف):</label>
@@ -39,21 +59,32 @@
         <label>مقدمة المقال (تمهيد للمقارنة):</label>
         <textarea id="articleIntro" rows="3" placeholder="اكتب مقدمة المقال هنا..." required></textarea>
 
-        <div id="appsContainer">
-            <!-- سيتم إضافة بلوكات التطبيقات هنا -->
-        </div>
+        <div id="appsContainer"></div>
 
         <button type="button" class="add-app-btn" onclick="addAppBlock()">+ إضافة تطبيق آخر للمقارنة</button>
 
-        <label>خاتمة المقال / الخلاصة والتوصية النهائيّة:</label>
+        <label>خاتمة المقال / الخلاصة والتوصية النهائية:</label>
         <textarea id="articleOutro" rows="3" placeholder="اكتب الخلاصة والتوصية هنا..."></textarea>
 
-        <button type="submit">نشر المقال بالكامل</button>
+        <button type="submit" class="submit-btn">نشر المقال بالكامل</button>
     </form>
     <div id="status"></div>
 </div>
 
 <script>
+    // كلمة المرور المطلوبة لدخول الصفحة
+    const SECRET_PASSWORD = "123010111  55Ee";
+
+    function checkPassword() {
+        const input = document.getElementById("passInput").value;
+        if (input === SECRET_PASSWORD) {
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("adminPanel").style.display = "block";
+        } else {
+            document.getElementById("loginError").style.display = "block";
+        }
+    }
+
     let appCount = 0;
 
     function addAppBlock() {
@@ -61,17 +92,16 @@
         const container = document.getElementById("appsContainer");
         const div = document.createElement("div");
         div.className = "app-block";
-        div.id = `appBlock_${appCount}`;
         div.innerHTML = `
             <h4>التطبيق رقم ${appCount}</h4>
             <label>اسم التطبيق:</label>
             <input type="text" class="app-name" placeholder="مثال: CapCut" required>
 
             <label>أيقونة التطبيق (رابط صورة):</label>
-            <input type="url" class="app-icon" placeholder="https://example.com/capcut-icon.png">
+            <input type="url" class="app-icon" placeholder="https://example.com/icon.png">
 
-            <label>شرح ومميزات التطبيق (مراجعة التطبيق):</label>
-            <textarea class="app-desc" rows="3" placeholder="اكتب مميزات وسلبيات التطبيق هنا..."></textarea>
+            <label>شرح ومميزات التطبيق:</label>
+            <textarea class="app-desc" rows="3" placeholder="اكتب مميزات وشرح التطبيق..."></textarea>
 
             <label>رابط التحميل المباشر من جوجل بلاي:</label>
             <input type="url" class="app-link" placeholder="https://play.google.com/store/apps/details?id=..." required>
@@ -79,7 +109,7 @@
         container.appendChild(div);
     }
 
-    // إضافة أول تطبيق تلقائياً عند فتح الصفحة
+    // إضافة أول بلوك تطبيق عند تحميل لوحة التحكم
     addAppBlock();
 
     const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles.json";
