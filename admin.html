@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -94,6 +93,7 @@
 </div>
 
 <script>
+    // كلمة المرور المعتمدة الجديدة
     const SECRET_PASSWORD = "123010111  55Ee";
     const dbUrl = "https://emosha-apps-default-rtdb.firebaseio.com/articles";
 
@@ -137,7 +137,6 @@
         container.appendChild(div);
     }
 
-    // جلب وحساب المقالات المنشورة
     let loadedArticlesData = {};
 
     function loadArticlesList() {
@@ -168,7 +167,6 @@
         });
     }
 
-    // بدء التعديل وسحب البيانات
     function editArticle(key) {
         const article = loadedArticlesData[key];
         if (!article) return;
@@ -198,7 +196,6 @@
         window.scrollTo({ top: document.getElementById("adminPanel").offsetTop, behavior: 'smooth' });
     }
 
-    // حذف مقال محدد
     function deleteArticle(key) {
         if (confirm("هل أنت تأكد من حذف هذا المقال نهائياً؟")) {
             fetch(`${dbUrl}/${key}.json`, { method: "DELETE" })
@@ -224,7 +221,6 @@
 
     addAppBlock();
 
-    // حفظ أو تعديل المقال
     document.getElementById("articleForm").addEventListener("submit", function(e) {
         e.preventDefault();
         const statusDiv = document.getElementById("status");
