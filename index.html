@@ -13,25 +13,20 @@
         .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 20px; font-weight: bold; color: white; text-decoration: none; }
         .logo span { font-size: 13px; opacity: 0.9; font-weight: normal; margin-right: 5px; }
-        .home-btn { color: white; text-decoration: none; font-size: 15px; font-weight: 500; background: rgba(255,255,255,0.2); padding: 6px 15px; border-radius: 4px; }
-        .home-btn:hover { background: rgba(255,255,255,0.3); }
 
         /* Main Layout */
         .container { max-width: 900px; margin: 25px auto; padding: 0 15px; }
-        .article-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .article-title { color: #007bff; font-size: 26px; margin-top: 0; margin-bottom: 10px; line-height: 1.4; }
-        .article-meta { font-size: 13px; color: #777; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .cover-img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
-        .intro-text, .outro-text { font-size: 16px; line-height: 1.8; color: #444; background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
         
-        /* App Cards */
-        .app-card { background: #fff; border: 1px solid #e9ecef; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-        .app-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .app-icon { width: 55px; height: 55px; border-radius: 12px; object-fit: cover; border: 1px solid #ddd; background: #e9ecef; }
-        .app-name { font-size: 20px; font-weight: bold; color: #222; margin: 0; }
-        .app-desc { font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 15px; }
-        .download-btn { display: inline-block; background: #28a745; color: white; text-decoration: none; padding: 12px 25px; border-radius: 6px; font-weight: bold; text-align: center; transition: background 0.2s; width: 100%; }
-        .download-btn:hover { background: #218838; }
+        /* Article Preview Cards */
+        .article-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 15px; }
+        .article-cover { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; }
+        .article-category { display: inline-block; background: #e7f1ff; color: #007bff; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; width: fit-content; }
+        .article-title { color: #1a252f; font-size: 22px; margin: 5px 0; line-height: 1.4; text-decoration: none; font-weight: bold; }
+        .article-title:hover { color: #007bff; }
+        .article-meta { font-size: 13px; color: #888; margin-bottom: 10px; }
+        .article-intro { color: #555; line-height: 1.6; font-size: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .read-more-btn { display: inline-block; background: #007bff; color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; text-align: center; width: fit-content; margin-top: 10px; transition: background 0.2s; }
+        .read-more-btn:hover { background: #0056b3; }
 
         /* Bottom Pages Content */
         .page-content { display: none; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); line-height: 1.8; }
@@ -51,13 +46,12 @@
         <a href="#" onclick="showHome()" class="logo">
             إيموشا Emosha Apps <span>| دليل ومقارنات أفضل التطبيقات</span>
         </a>
-        <a href="#" onclick="showHome()" class="home-btn">الرئيسية</a>
     </div>
 </header>
 
 <div class="container">
 
-    <!-- قسم المقالات الرئيسية -->
+    <!-- قسم المقالات الرئيسية (عرض مختصر) -->
     <div id="articlesContainer">
         <p style="text-align: center; color: #666;">جاري تحميل المقالات...</p>
     </div>
@@ -74,21 +68,14 @@
         <h2>سياسة الخصوصية</h2>
         <p><small style="color: #777;">آخر تحديث: أغسطس 2026</small></p>
         <p>في منصة <strong>إيموشا Emosha Apps</strong>، نولي أهمية قصوى لحماية خصوصية زوارنا والالتزام بالشفافية الكاملة:</p>
-        
         <h3>1. جمع المعلومات</h3>
-        <p>نحن لا نجمع أي بيانات شخصية محددة للهوية (مثل اسمك أو بريدك الإلكتروني) إلا إذا قمت بالتواصل معنا طواعية عبر وسائل الاتصال المتاحة.</p>
-
+        <p>نحن لا نجمع أي بيانات شخصية محددة للهوية إلا إذا قمت بالتواصل معنا طواعية عبر وسائل الاتصال المتاحة.</p>
         <h3>2. ملفات تعريف الارتباط (Cookies)</h3>
-        <p>قد يستخدم موقعنا ملفات تعريف الارتباط لتحسين تجربة التصفح وتذكر تفضيلاتك، بالإضافة إلى تحليل الزيارات لتحسين المحتوى والمقارنات المقدمة.</p>
-
-        <h3>3. الإعلانات وتطبيقات الطرف الثالث (Google AdSense)</h3>
-        <p>نستخدم شركات إعلانية خارجية مثل <strong>Google AdSense</strong> لعرض الإعلانات عند زيارة موقعنا. تتبع هذه الشركات ملفات تعريف الارتباط لتحديد الإعلانات المناسبة بناءً على زياراتك السابقة لهذا الموقع ومواقع أخرى على الإنترنت.</p>
-
+        <p>قد يستخدم موقعنا ملفات تعريف الارتباط لتحسين تجربة التصفح وتذكر تفضيلاتك.</p>
+        <h3>3. الإعلانات (Google AdSense)</h3>
+        <p>نستخدم شركات إعلانية خارجية مثل Google AdSense لعرض الإعلانات عند زيارة موقعنا.</p>
         <h3>4. الروابط الخارجية للمتجر</h3>
-        <p>تتضمن مقالاتنا ومراجعاتنا روابط توجهك مباشرة إلى المتاجر الرسمية المعتمدة (مثل Google Play Store). نحن لسنا مسؤولين عن سياسة الخصوصية والممارسات الخاصة بهذه التطبيقات بعد المغادرة إلى متجر جوجل.</p>
-
-        <h3>5. الموافقة والتحديثات</h3>
-        <p>باستخدامك لمنصتنا، فإنك توافق على سياسة الخصوصية الخاصة بنا. ونحتفظ بحق تحديث هذه السياسة عند الحاجة لتتوافق مع التشريعات والمعايير التقنية الحديثة.</p>
+        <p>تتضمن مقالاتنا روابط توجهك مباشرة إلى المتاجر الرسمية المعتمدة (مثل Google Play Store).</p>
     </div>
 
     <!-- صفحة اتصل بنا -->
@@ -140,34 +127,18 @@
         let html = "";
         Object.keys(data).reverse().forEach(key => {
             const article = data[key];
+            const articleUrl = `article.html?id=${key}`;
             
-            let appsHtml = "";
-            if (article.apps && article.apps.length > 0) {
-                article.apps.forEach((app) => {
-                    // معالجة رابط الصورة لتفادي ظهور Error
-                    const iconUrl = app.icon && app.icon.trim() !== "" ? app.icon : "https://cdn-icons-png.flaticon.com/512/2589/2589175.png";
-                    
-                    appsHtml += `
-                        <div class="app-card">
-                            <div class="app-header">
-                                <img src="${iconUrl}" class="app-icon" alt="${app.name}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2589/2589175.png'">
-                                <h3 class="app-name">${app.name}</h3>
-                            </div>
-                            <div class="app-desc">${app.desc}</div>
-                            <a href="${app.link}" target="_blank" rel="noopener noreferrer" class="download-btn">تحميل ${app.name} من جوجل بلاي</a>
-                        </div>
-                    `;
-                });
-            }
-
             html += `
                 <div class="article-card">
-                    <h1 class="article-title">${article.title}</h1>
-                    <div class="article-meta">التصنيف: ${article.category || 'عام'} | التاريخ: ${article.date || ''}</div>
-                    ${article.cover ? `<img src="${article.cover}" class="cover-img" alt="${article.title}">` : ''}
-                    <div class="intro-text">${article.intro}</div>
-                    ${appsHtml}
-                    ${article.outro ? `<div class="outro-text"><strong>الخلاصة والتوصية:</strong><br>${article.outro}</div>` : ''}
+                    ${article.cover ? `<img src="${article.cover}" class="article-cover" alt="${article.title}">` : ''}
+                    <div>
+                        <span class="article-category">${article.category || 'عام'}</span>
+                        <a href="${articleUrl}" class="article-title"><h2>${article.title}</h2></a>
+                        <div class="article-meta">تاريخ النشر: ${article.date || ''}</div>
+                        <div class="article-intro">${article.intro}</div>
+                        <a href="${articleUrl}" class="read-more-btn">اقرأ المقال كاملاً والتطبيقات ←</a>
+                    </div>
                 </div>
             `;
         });
