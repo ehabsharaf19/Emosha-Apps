@@ -1,28 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
-  <!-- الصفحة الرئيسية -->
+  <!-- الصفحة الرئيسية (وتشمل أقسام من نحن والسياسة المدمجة) -->
   <url>
     <loc>https://emosha-apps.vercel.app/</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- مقال تطبيقات الذكاء الاصطناعي -->
+  <!-- روابط المقالات المنشورة (ضع الـ ID لكل مقال مكان ID_ARTICLE) -->
+  
+  <!-- 1. مقال تطبيقات المونتاج وتعديل الفيديو -->
   <url>
-    <loc>https://emosha-apps.vercel.app/article.html?id=ai-apps-2026</loc>
-    <lastmod>2026-08-30</lastmod>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0FvizyvxLtZiBuD-wU</loc>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- مقال تطبيقات المونتاج -->
+  <!-- 2. مقال تطبيقات تصميم الجرافيك والصور -->
   <url>
-    <loc>https://emosha-apps.vercel.app/article.html?id=video-editing-2026</loc>
-    <lastmod>2026-08-30</lastmod>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0KWT2HduG0VWkzi2E5</loc>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <!-- 3. مقال تطبيقات الذكاء الاصطناعي اليومية -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0KXv5jBW1tWeehv7iT</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 4. مقال توليد وتحسين الصور بالذكاء الاصطناعي -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0KYrZs13yUhtvm5NUf</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 5. مقال تطبيقات زيادة الإنتاجية وتنظيم الوقت -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0Ke17lImlXFhOWmor2</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 6. مقال تطبيقات تنظيم وتدوين الملاحظات -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0Kf-adnWt7o0l6KfPg</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 7. مقال تطبيقات التخزين السحابي -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0Kfs-qw29yHujhIBZk</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 8. مقال متصفحات الإنترنت للهاتف -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0KgnqsKIkUfi4RRvhq</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 8. مقال متصفحات الإنترنت للهاتف -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0KhuusHaY7q36LDMmN</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
