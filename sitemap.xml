@@ -82,4 +82,11 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+    <!-- 10. مقال متصفحات الإنترنت للهاتف -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0L5EDi56y1yVaHIuKc</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
