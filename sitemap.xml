@@ -159,4 +159,32 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+    <!-- 21. مقال متصفحات الإنترنت للهاتف -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0ZUu0hKYseEMXGVe4I</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    <!-- 22. مقال متصفحات الإنترنت للهاتف -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0ZVryK9hULWvqKYEhG</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    <!-- 23. مقال متصفحات الإنترنت للهاتف -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0ZWn2cE9Pu-IZg8NbO</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    <!-- 24. مقال متصفحات الإنترنت للهاتف -->
+  <url>
+    <loc>https://emosha-apps.vercel.app/article.html?id=-P0ZXbQ4Z8dPfO-chVvP</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
